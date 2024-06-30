@@ -11,9 +11,11 @@ export default function Home() {
   const [questions, setQuestions]= useState([])
   const [responseCode, setResponseCode] = useState(null)
   const [error, setError] = useState(null)
-  const [answerCheck, setAnswerCheck] = useState(0)
+  const [answerCheck, setAnswerCheck] = useState("")
   const [holdOneAnswer, setHoldOneAnswer] = useState({})
-  
+  const [decodedCorrectAnswer, setDecodedCorrectAnswer] = useState(null)
+  const [decodedIncorrectAnswer, setDecodedIncorrectAnswer] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const decodeHtml = (html) => {
       var txt = document.createElement("textarea")
@@ -22,6 +24,7 @@ export default function Home() {
   }
 
   const getApi = async () => {
+    setLoading(true)
     try{
         const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
         const data = await res.json()
@@ -30,6 +33,8 @@ export default function Home() {
             const decodedQuestions = data.results.map((item) => {
                 const decodeCorrectAnswer = decodeHtml(item.correct_answer)
                 const decodeIncorrectAnswer = item.incorrect_answers.map(decodeHtml)
+                setDecodedCorrectAnswer(decodeCorrectAnswer)
+                setDecodedIncorrectAnswer(decodeIncorrectAnswer)
                 const answers = shuffleArray([decodeCorrectAnswer, ...decodeIncorrectAnswer])
                 return{
                     ...item,
@@ -52,6 +57,7 @@ export default function Home() {
         console.log("Error fetching the API data:", error)
         setError("Error fetching data from the API")
     }
+    setLoading(false)
   }
   useEffect(() =>{
       getApi()
@@ -94,7 +100,17 @@ export default function Home() {
               console.log("attempt all the questions")
           }
       }
-      setAnswerCheck(correctCount)
+      setAnswerCheck(`you scored ${correctCount}/${questions.length} correct answers`)
+  }
+  function resetGame(){
+        setQuestions([])
+        setResponseCode(null)
+        setError(null)
+        setAnswerCheck("")
+        setHoldOneAnswer({})
+        setDecodedCorrectAnswer(null)
+        setDecodedIncorrectAnswer([])
+        getApi()
   }
   return(
     <main>
@@ -109,9 +125,12 @@ export default function Home() {
             holdAnswer = {holdAnswer}
             checkAnswer = {checkAnswer}
             answerCheck = {answerCheck}
-            setAnswerCheck = {setAnswerCheck}
             holdOneAnswer = {holdOneAnswer}
             setHoldOneAnswer = {setHoldOneAnswer}
+            decodedCorrectAnswer = {decodedCorrectAnswer}
+            decodedIncorrectAnswer = {decodedIncorrectAnswer}
+            resetGame = {resetGame}
+            loading = {loading}
         />
          )
         }
