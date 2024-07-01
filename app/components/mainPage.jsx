@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-
+import Navbar from "./Navbar";
 
 export default function MainPage(props) {
   const handleAnswerCheck = (answerId, questionIndex) => {
@@ -54,6 +54,7 @@ export default function MainPage(props) {
       ) : (
         <>
           <div>
+          <Navbar/>
           {props.questions && props.questions.length > 0 && props.questions.map((question, index) => {
             return (
               <div key={index}>
@@ -79,6 +80,7 @@ export default function MainPage(props) {
             );
           })}
           </div>
+          <navbar/>
           {!props.loading && (
             <button onClick={handleCheckAnswer}>{submitButton}</button>
           )}
