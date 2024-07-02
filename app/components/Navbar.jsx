@@ -13,10 +13,7 @@ const Navbar = ({averageScore, setUser}) => {
   return (
     <div className="w-full">
       <div className="mx-auto flex items-center justify-between py-4 px-4 w-3/4">
-        <Link href="/">
-          <div className="text-3xl font-bold text-[#4D5B9E] whitespace-nowrap">Quizzical</div>
-        </Link>
-        
+        <div className="text-3xl font-bold text-[#4D5B9E] whitespace-nowrap">Quizzical</div>
         {/* Navigation links for desktop */}
         <div className='flex'>
           <ul className="flex space-x-4">

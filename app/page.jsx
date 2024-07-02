@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback} from 'react';
 import { auth, saveScore, getScores, signOutUser } from './firebase';
 import SignIn from './SignIn';
 import IntroPage from "./components/landingPage";
@@ -30,16 +30,16 @@ export default function Home() {
         setUser(null);
       }
     });
-  }, []);
+  }, [fetchScores]);
 
-  const fetchScores = async (userId) => {
+  const fetchScores = useCallback(async (userId) => {
     const scores = await getScores(userId);
     console.log('Fetched scores:', scores); // Logging fetched scores
     if (scores.length > 0) {
       const average = scores.reduce((acc, score) => acc + score, 0) / scores.length;
       setAverageScore(average);
     }
-  };
+  }, []);
 
   const decodeHtml = (html) => {
       var txt = document.createElement("textarea")
@@ -47,7 +47,7 @@ export default function Home() {
       return txt.value
   }
 
-  const getApi = async () => {
+  const getApi = useCallback(async () => {
     setLoading(true)
     try{
         const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
@@ -82,10 +82,11 @@ export default function Home() {
         setError("Error fetching data from the API")
     }
     setLoading(false)
-  }
+  }, [])
+
   useEffect(() =>{
       getApi()
-  }, [])
+  }, [getApi])
   
   function shuffleArray(array) {
       for(let i = array.length - 1; i > 0; i--) {
