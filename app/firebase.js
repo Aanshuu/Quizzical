@@ -6,13 +6,13 @@ import { getFirestore, collection, addDoc, getDocs, query, where } from "firebas
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyC_HK53ncQHv4fYupIVZAIQx33hfDdPmOc",
+  authDomain: "quizzical-65a72.firebaseapp.com",
+  projectId: "quizzical-65a72",
+  storageBucket: "quizzical-65a72.appspot.com",
+  messagingSenderId: "909645400358",
+  appId: "1:909645400358:web:c10cce19f848d50c77d9e7",
+  measurementId: "G-RVMTPXBH21"
 };
 
 // Initialize Firebase
