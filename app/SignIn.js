@@ -1,4 +1,5 @@
 // SignIn.js
+'use client';
 import React from 'react';
 import { auth, provider, signInWithPopup } from './firebase';
 
