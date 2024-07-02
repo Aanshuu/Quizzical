@@ -146,36 +146,35 @@ export default function Home() {
   }
   return(
     <main>
-    {user ? (
-      <>
-        <button onClick={handleSignOut}>Sign Out</button>
-        {currentPage === "intro" ? (
-          <IntroPage
-            onStartQuiz={() => setCurrentPage("main")}
-          />
-        ) : (
-          <MainPage
-            responseCode={responseCode}
-            questions={questions}
-            error={error}
-            holdAnswer={holdAnswer}
-            checkAnswer={checkAnswer}
-            answerCheck={answerCheck}
-            holdOneAnswer={holdOneAnswer}
-            setHoldOneAnswer={setHoldOneAnswer}
-            decodedCorrectAnswer={decodedCorrectAnswer}
-            decodedIncorrectAnswer={decodedIncorrectAnswer}
-            resetGame={resetGame}
-            loading={loading}
-          />
-        )}
-        <div>
-          <h3>Average Score: {averageScore.toFixed(2)}/5</h3>
-        </div>
-      </>
-    ) : (
-      <SignIn setUser={setUser} />
-    )}
+      {user ? (
+        <>
+          {/* <button onClick={handleSignOut}>Sign Out</button> */}
+          {currentPage === "intro" ? (
+            <IntroPage
+              onStartQuiz={() => setCurrentPage("main")}
+            />
+          ) : (
+            <MainPage
+              responseCode={responseCode}
+              questions={questions}
+              error={error}
+              holdAnswer={holdAnswer}
+              checkAnswer={checkAnswer}
+              answerCheck={answerCheck}
+              holdOneAnswer={holdOneAnswer}
+              setHoldOneAnswer={setHoldOneAnswer}
+              decodedCorrectAnswer={decodedCorrectAnswer}
+              decodedIncorrectAnswer={decodedIncorrectAnswer}
+              resetGame={resetGame}
+              loading={loading}
+              averageScore={averageScore}
+              setUser={setUser}
+            />
+          )}
+        </>
+      ) : (
+        <SignIn setUser={setUser} />
+      )}
   </main>
 )
 }

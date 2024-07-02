@@ -46,7 +46,7 @@ export default function MainPage(props) {
   console.log(props.error)
 
   return (
-    <div>
+    <div className="h-screen">
       {/* <h2>Response Code: {props.responseCode}</h2> */}
       {/* {props.error && <p>{props.error}</p>} */}
       {props.loading ? (
@@ -54,40 +54,45 @@ export default function MainPage(props) {
       ) : (
         <>
           <div>
-          <Navbar/>
-          {props.questions && props.questions.length > 0 && props.questions.map((question, index) => {
-            return (
-              <div key={index}>
-                <div className="font-semibold">{question.question}</div>
-                <div>
-                  {question.answers.map((answer, i) => (
-                    <button className="p-2 m-2 border-2 border-black rounded-lg"
-                      style={{
-                        backgroundColor: 
-                          buttonState && answerStatus[`${index}-${answer.id}`]
-                          ? answerStatus[`${index}-${answer.id}`]
-                          : (props.holdOneAnswer[index] === answer.id ? "#D6DBF5" : "white"),
-                      }}
-                      key={i}
-                      onClick={() => handleAnswerCheck(answer.id, index)}
-                    >
-                      {answer.text}
-                    </button>
-                  ))}
-                </div>
-                <hr />
-              </div>
-            );
-          })}
+          <Navbar averageScore={props.averageScore} setUser={props.setUser}/>
+            <div className="flex flex-col items-center w-full">
+              {props.questions && props.questions.length > 0 && props.questions.map((question, index) => {
+                return (
+                  <div key={index} className="flex flex-col items-start justify-start w-3/4 mb-2 p-2 border border-gray-300 rounded-md">
+                    <div className="font-semibold">{question.question}</div>
+                    <div className="flex flex-wrap">
+                      {question.answers.map((answer, i) => (
+                        <button className="p-2 m-2 border-2 border-black rounded-lg"
+                          style={{
+                            backgroundColor: 
+                              buttonState && answerStatus[`${index}-${answer.id}`]
+                              ? answerStatus[`${index}-${answer.id}`]
+                              : (props.holdOneAnswer[index] === answer.id ? "#D6DBF5" : "white"),
+                          }}
+                          key={i}
+                          onClick={() => handleAnswerCheck(answer.id, index)}
+                        >
+                          {answer.text}
+                        </button>
+                      ))}
+                    </div>
+                    <hr />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <navbar/>
-          {!props.loading && (
-            <button onClick={handleCheckAnswer}>{submitButton}</button>
-          )}
+          <div className="flex justify-center items-start">
+            {!props.loading && (
+              <button
+              className="bg-[#4D5B9E] px-5 py-2 border-2 rounded-2xl text-white text-md" 
+              onClick={handleCheckAnswer}>{submitButton}</button>
+            )}
+          </div>
         </>
       )}
       <div>
-        <h3>{props.answerCheck}</h3>
+        <h3 className="flex justify-center items-start font-semibold">{props.answerCheck}</h3>
       </div>
     </div>
   );

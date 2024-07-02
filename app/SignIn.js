@@ -13,8 +13,10 @@ const SignIn = ({ setUser }) => {
   };
 
   return (
-    <div>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <div className="flex justify-center items-center h-screen">
+      <button 
+        className="border-2 border-black p-2 rounded-lg"
+        onClick={signInWithGoogle}>Sign In</button>
     </div>
   );
 };
