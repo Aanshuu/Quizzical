@@ -30,7 +30,7 @@ export default function Home() {
         setUser(null);
       }
     });
-  }, [fetchScores]);
+  }, []);
 
   const fetchScores = useCallback(async (userId) => {
     const scores = await getScores(userId);
@@ -86,7 +86,7 @@ export default function Home() {
 
   useEffect(() =>{
       getApi()
-  }, [getApi])
+  }, [])
   
   function shuffleArray(array) {
       for(let i = array.length - 1; i > 0; i--) {
